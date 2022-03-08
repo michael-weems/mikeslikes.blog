@@ -1,0 +1,442 @@
+@import url("https://fonts.googleapis.com/css?family=Space+Mono:400|Work+Sans:400");
+@import "./normalize.css";
+@import "./main.css";
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+:root {
+  /* Define Colors as colors */
+  --green: #00ebc7;
+  --red: #ff5470;
+  --yellow: #fde24f;
+  --black: #1b2d45;
+  --dark-blue: #00214d;
+  --grey: #bfbfbf;
+  --light-grey: #f2f4f6;
+  --dark-grey: #222;
+  --white: #fff;
+
+  /* Define Colors intentions */
+  --primary: var(--green);
+  --danger: var(--red);
+  --background: var(--light-grey);
+  --text-color: var(--black);
+  --button-color: var(--primary);
+  --button-text-color: var(--black);
+  --line-color: var(--grey);
+  --card-background: var(--white);
+  --header-background: var(--dark-blue);
+  --footer-background: var(--black);
+
+  /* Styles */
+  --line: solid 1px var(--line-color);
+
+  /* Type */
+  --heading-font: "Space Mono", monospace;
+  --body-font: "Work Sans", sans-serif;
+  --base-font-size: 112.5%;
+  --h1: 3.052em;
+  --h2: 2.441em;
+  --h3: 1.953em;
+  --h4: 1.563em;
+  --h5: 1.25em;
+  --small-text: 0.8em;
+
+  /* Elevation */
+  --level-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --level-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --level-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --level-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Positioning */
+  --container-padding: 2.5%;
+  --header-height: 3rem;
+  --border-radius: 10px;
+}
+
+/* FROM Type Scale */
+html {
+  font-size: var(--base-font-size);
+  box-sizing: border-box;
+}
+
+/* For every element in the entire site, make it so padding doesn't add in addition to the width. */
+/* Any width percentage you specify will always be what happens, the padding will take out of the width you specify to reach the width you specify */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/*18px*/
+
+body {
+  font-family: var(--body-font);
+  font-weight: 400;
+  line-height: 1.65;
+  background: var(--background);
+  color: var(--text-color);
+}
+
+header {
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: var(--header-background);
+  box-shadow: var(--level-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--container-padding);
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+}
+
+header nav a + a {
+  margin-left: 10px;
+}
+
+footer {
+  --footer-text-color: var(--light-grey);
+  color: var(--footer-text-color);
+  background-color: var(--footer-background);
+  padding: 2rem var(--container-padding);
+  text-align: center;
+}
+
+footer a {
+  color: var(--footer-text-color);
+}
+
+footer p {
+  margin-bottom: 0;
+  max-width: none;
+}
+
+p {
+  margin-bottom: 1.15rem;
+  max-width: 40em;
+}
+
+p a,
+blockquote a {
+  color: var(--text-color);
+  text-decoration: none;
+  border-bottom: solid 2px var(--primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 2.75rem 0 1.05rem;
+  font-family: var(--heading-font);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: var(--h1);
+}
+
+h2 {
+  font-size: var(--h2);
+}
+
+h3 {
+  font-size: var(--h3);
+}
+
+h4 {
+  font-size: var(--h4);
+}
+
+h5 {
+  font-size: var(--h5);
+}
+
+small,
+.text_small {
+  font-size: var(--small-text);
+}
+
+/* End typescale */
+
+.dark {
+  --background: var(--black);
+  --text-color: var(--light-grey);
+}
+
+blockquote {
+  margin: 10px;
+  padding: 2em;
+  background: var(--card-background);
+  box-shadow: var(--level-3);
+}
+
+label {
+  display: block;
+  font-size: var(--small-text);
+}
+
+input,
+textarea {
+  padding: 4px 5px;
+  border: var(--line);
+  border-radius: 4px;
+}
+
+textarea {
+  width: 100%;
+  height: 5rem;
+}
+
+::placeholder {
+  color: var(--grey);
+}
+
+select {
+  border: var(--line);
+}
+
+hr {
+  border-top: var(--line);
+}
+
+button {
+  appearance: none;
+  color: var(--button-text-color);
+  background-color: var(--button-color);
+  border: none;
+  border-radius: 10px;
+  padding: 5px 25px;
+  box-shadow: var(--level-1);
+  transition: 0.3s ease-in-out box-shadow;
+}
+
+button:hover {
+  box-shadow: var(--level-2);
+}
+
+button[disabled] {
+  opacity: 0.4;
+}
+
+/* .cancel can mean anything */
+button.cancel {
+  --button-color: var(--danger);
+  --text-color: white;
+}
+
+button.small {
+  font-size: var(--small-text);
+}
+
+.layout {
+  /* The top padding is the header height + whatever visual padding we want */
+  padding: calc(3rem + var(--header-height)) var(--container-padding);
+}
+
+.grid {
+  --grid-columns: 2;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+}
+
+.columns-3 {
+  --grid-columns: 3;
+}
+
+/* Utilizing BEM for a more generic container (not as recommended as it relies on the grid class) */
+.grid--split {
+  grid-template-columns: 33% 67%;
+  gap: 20px;
+}
+
+/* Create a new block element that isn't reliant on the grid class, is its own self-contained entity */
+.split {
+  display: grid;
+  grid-template-columns: 33% 67%;
+  gap: 20px;
+}
+
+.flex {
+  --justify-content: space-between;
+  display: flex;
+  justify-content: var(--justify-content);
+}
+
+.flex-around {
+  --justify-content: space-around;
+}
+
+.fake-logo {
+  font-size: var(--base-font-size);
+  margin: 0;
+}
+
+.card {
+  padding: 2em;
+  background: var(--card-background);
+  box-shadow: var(--level-3);
+  border-radius: var(--border-radius);
+}
+
+/* First item in card will never have margin top */
+.card > *:first-child {
+  margin-top: 0;
+}
+
+/* Last item in card will never have margin bottom */
+.card > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Themes */
+/* */
+/* */
+
+/* Dark Theme */
+.dark-theme {
+  --background: var(--black);
+  --text-color: var(--light-grey);
+  --header-background: var(--dark-grey);
+  --footer-background: var(--dark-grey);
+  --card-background: var(--dark-grey);
+  --button-text-color: var(--black);
+}
+
+/* OLED Theme */
+.oled-theme {
+  --black: #000;
+  --header-background: var(--dark-grey);
+  --footer-background: var(--dark-grey);
+  --card-background: var(--dark-grey);
+}
+
+/* Entire custom theme, you can modify anything in here to completely adjust the theme of the site */
+.theme {
+  /* Define Colors as colors */
+  --green: #00ebc7;
+  --red: #ff5470;
+  --yellow: #fde24f;
+  --black: #1b2d45;
+  --dark-blue: #00214d;
+  --grey: #bfbfbf;
+  --light-grey: #f2f4f6;
+  --dark-grey: #222;
+  --white: #fff;
+
+  /* Define Colors intentions */
+  --primary: var(--green);
+  --danger: var(--red);
+  --background: var(--light-grey);
+  --text-color: var(--black);
+  --button-color: var(--primary);
+  --button-text-color: var(--black);
+  --line-color: var(--grey);
+  --card-background: var(--white);
+  --header-background: var(--dark-blue);
+  --footer-background: var(--black);
+
+  /* Styles */
+  --line: solid 1px var(--line-color);
+
+  /* Type */
+  --heading-font: "Space Mono", monospace;
+  --body-font: "Work Sans", sans-serif;
+  --base-font-size: 112.5%;
+  --h1: 3.052em;
+  --h2: 2.441em;
+  --h3: 1.953em;
+  --h4: 1.563em;
+  --h5: 1.25em;
+  --small-text: 0.8em;
+
+  /* Elevation */
+  --level-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --level-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --level-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --level-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Positioning */
+  --container-padding: 2.5%;
+  --header-height: 3rem;
+  --border-radius: 10px;
+}
+
+/* Media Queries for screen size changes */
+@media only screen and (max-width: 500px) {
+  :root {
+    --base-font-size: 100%;
+  }
+
+  .grid {
+    display: block;
+  }
+
+  .flex {
+    display: block;
+  }
+}
+
+/*************/
+/**  Popups **/
+.body-blackout {
+  position: absolute;
+  z-index: 1010;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: none;
+}
+.body-blackout.is-blacked-out {
+  display: block;
+}
+
+.command-palette {
+  height: 365px;
+  width: 650px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 300ms ease-in-out;
+  z-index: 1011;
+}
+.command-palette.is--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.command-palette__close {
+  position: absolute;
+  font-size: 1.2rem;
+  right: -10px;
+  top: -10px;
+  cursor: pointer;
+}
