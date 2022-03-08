@@ -1,8 +1,5 @@
-import { keyPress } from './key-press'
-import * as KeyCode from './key-codes'
-import { registerKeyPresses} from './key-press-register'
-import {openCommandPalette} from './command-palette'
 import './style.css'
+import './keyboard-shortcuts/register'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 app.innerHTML = `
@@ -19,11 +16,5 @@ app.innerHTML = `
   </div>
 
   <h1>Jebus Bebus</h1>
-`
+`;
 
-
-
-
-const keyPress_CommandPalette = keyPress([KeyCode.COMMAND, KeyCode.SHIFT, KeyCode.P], openCommandPalette);
-const keyPress_Alert = keyPress([KeyCode.CONTROL, KeyCode.L], () => alert('yee'))
-registerKeyPresses([keyPress_CommandPalette, keyPress_Alert]);

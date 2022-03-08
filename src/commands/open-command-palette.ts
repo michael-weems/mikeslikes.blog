@@ -1,4 +1,4 @@
-import { isDefined, isNotDefined } from "./utils";
+import { isDefined, isNotDefined } from "../utils";
 
 export function openCommandPalette(){
     const commandPalette = document.getElementById(`commandPalette`);
