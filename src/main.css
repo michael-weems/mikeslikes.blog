@@ -169,6 +169,14 @@ textarea {
   clear: both;
 }
 
+.article-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.article p {
+  text-align: left;
+}
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.
@@ -260,4 +268,3 @@ textarea {
     page-break-after: avoid;
   }
 }
-
