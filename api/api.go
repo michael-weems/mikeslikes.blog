@@ -62,7 +62,7 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func getArticle(article string) []byte {
 	// Directory we want to get all files from.
-	md, err := ioutil.ReadFile("../posts/" + article + ".md")
+	md, err := ioutil.ReadFile("../posts/" + article)
 	if err != nil {
 		log.Fatal(err)
 	}

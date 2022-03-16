@@ -62,6 +62,9 @@
   --container-padding: 2.5%;
   --header-height: 3rem;
   --border-radius: 10px;
+
+  /* Command Palette */
+  --command-palette-height: 10rem;
 }
 
 /* FROM Type Scale */
@@ -300,6 +303,35 @@ button.small {
   border-radius: var(--border-radius);
 }
 
+.result-title {
+  font-size: medium;
+}
+.result-tag {
+  color: var(--red);
+}
+
+.card--small {
+  background: var(--grey);
+  margin-bottom: 0.2rem;
+  height: 1.5rem;
+  font-size: small;
+  display: flex;
+  flex-basis: content;
+  vertical-align: middle;
+  border-radius: var(--border-radius);
+}
+
+.card--small :hover {
+  box-shadow: var(--level-3);
+  cursor: pointer;
+}
+/* .card.small h4 {
+  text-align: left;
+}
+.card.small p {
+  text-align: center;
+} */
+
 /* First item in card will never have margin top */
 .card > *:first-child {
   margin-top: 0;
@@ -418,11 +450,11 @@ button.small {
 }
 
 .command-palette {
-  height: 365px;
+  height: var(--command-palette-height);
   width: 650px;
-  position: absolute;
+  position: fixed;
   left: 50%;
-  top: 50%;
+  top: 20rem;
   transform: translate(-50%, -50%);
   opacity: 0;
   pointer-events: none;
