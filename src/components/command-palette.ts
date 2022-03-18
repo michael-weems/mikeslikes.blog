@@ -1,56 +1,21 @@
+import { closeCommandPalette, openCommandPalette } from '../commands/open-command-palette';
 import { Commandable, ComponentConstructor, Popup } from '../component';
 import { KeyCode } from '../keyboard-shortcuts/key-codes';
 import { keyPress } from '../keyboard-shortcuts/key-press';
 import { registerKeyPresses } from '../keyboard-shortcuts/key-press-register';
-import { isDefined, isNotDefined, whenElementReady } from '../utils';
+import { whenElementReady } from '../utils';
 
 export const selector = 'command-palette';
 
-function getElements() {
-  const commandPalette = document.querySelector('.command-palette');
-  if (isNotDefined(commandPalette)) throw new Error('yo the dev is a dingus! there is no command-palette to open');
-  
-  const bodyBlackout = document.querySelector('.body-blackout');
-  if (isNotDefined(bodyBlackout)) throw new Error('yo the dev is a dingus! there is no body-blackout element');
-  
-  return {commandPalette, bodyBlackout};
-}
-
-async function closePopup(){
-  await whenElementReady('.command-palette');
-
-  const {commandPalette, bodyBlackout} = getElements();
-  commandPalette.classList.remove('is-visible');
-  bodyBlackout.classList.remove('is-blacked-out');
-}
-async function openPopup(){
-  await whenElementReady('.command-palette');
-  const {commandPalette, bodyBlackout} = getElements();
-
-  commandPalette.classList.add('is-visible');
-  bodyBlackout.classList.add('is-blacked-out');
-
-  const closeCommandPalette = commandPalette.querySelector('.command-palette__close');
-  if (isDefined(closeCommandPalette)){
-    closeCommandPalette.addEventListener('click', () => {
-      commandPalette.classList.remove('is-visible');
-      if (isDefined(bodyBlackout)){
-        bodyBlackout.classList.remove('is-blacked-out');
-      }
-    });
-  }
-
-  // Close the command palette if clicked outsideå
-  bodyBlackout.addEventListener('click', () => {
-    close();
-  });
-}
 
 export const CommandPalette: Promise<Popup<{}> & Commandable> = whenElementReady(`#${selector}`).then((elem) => {
   return {
     ...ComponentConstructor(elem, {
       selector, 
+      onInit(){},
+      readyWhen: ['.body-blackout', '.command-palette'],
       data: {}, 
+      
       template: (props) => `
       <!-- body overlay -->
       <div class="body-blackout"></div>
@@ -63,16 +28,25 @@ export const CommandPalette: Promise<Popup<{}> & Commandable> = whenElementReady
         </h1>
       </div>`,
     }),
-    openPopup,
-    closePopup,
-    commands: [
-      closePopup, openPopup
-    ], 
+    async openPopup(){
+      return openCommandPalette({mode: 'search'});
+    },
+    async closePopup(){      
+      return closeCommandPalette();
+    },
     registerKeyboardShortcuts() {
       registerKeyPresses([
-        keyPress([KeyCode.Command, KeyCode.Shift, KeyCode.P], openPopup),
-        keyPress([KeyCode.Control, KeyCode.Shift, KeyCode.P], openPopup)
+        keyPress([KeyCode.Command, KeyCode.Shift, KeyCode.P], () => openCommandPalette({mode: 'command'})),
+        keyPress([KeyCode.Control, KeyCode.Shift, KeyCode.P], () => openCommandPalette({mode: 'command'})),
+        keyPress([KeyCode.Command, KeyCode.K], () => openCommandPalette({mode: 'search'})),
+        keyPress([KeyCode.Control, KeyCode.K], () => openCommandPalette({mode: 'search'})),
       ]);
     }
   };
+});
+
+CommandPalette.then((commandPalette) => {
+  commandPalette.render();
+  commandPalette.onInit();
+  commandPalette.registerKeyboardShortcuts();
 });

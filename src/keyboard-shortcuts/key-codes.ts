@@ -3,5 +3,6 @@ export const KeyCode = {
   Control: 17,
   Shift: 16,
   P: 80,
-  L: 76
+  K: 75,
+  L: 76,
 };

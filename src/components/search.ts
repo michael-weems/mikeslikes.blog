@@ -6,11 +6,16 @@ const selector = 'search';
 export const Search: Promise<Component<{}>> = whenElementReady(`#${selector}`).then((elem) => {
   return ComponentConstructor(elem, {
     selector, 
+    onInit(){},
+    readyWhen: ['#search-bar', '#search-results'],
     data: {}, 
     template: (props) => `
-    <button id="search-button" type="button">Fetch Posts</button>
+    <input id="search-bar" type="text" />
     <div id="search-results"></div>`,
   });
 });
 
-
+Search.then((search) => {
+  search.render();
+  search.onInit();
+});

@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
@@ -62,7 +63,7 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func getArticle(article string) []byte {
 	// Directory we want to get all files from.
-	md, err := ioutil.ReadFile("../posts/" + article)
+	md, err := ioutil.ReadFile("../posts/" + article + ".md")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -94,7 +95,7 @@ func memoizedPosts() FuncPosts {
 		// Loop over files.
 		for outputIndex := range outputDirFiles {
 			outputFileHere := outputDirFiles[outputIndex]
-			name := outputFileHere.Name()
+			name := strings.ReplaceAll(outputFileHere.Name(), ".md", "")
 
 			cache = append(cache, name)
 		}

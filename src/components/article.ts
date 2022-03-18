@@ -6,6 +6,8 @@ const selector = 'article';
 export const Article: Promise<Component<{}>> = whenElementReady(`#${selector}`).then((elem) => {
   return ComponentConstructor(elem, {
     selector, 
+    onInit(){},
+    readyWhen: ['#article-div'],
     data: {}, 
     template: (props) => `
     <div class="article-container">
@@ -17,3 +19,7 @@ export const Article: Promise<Component<{}>> = whenElementReady(`#${selector}`).
 });
 
 
+Article.then((article) => {
+  article.render();
+  article.onInit();
+});
