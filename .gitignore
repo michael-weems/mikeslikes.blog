@@ -38,6 +38,9 @@ bower_components
 build/Release
 bin/
 
+config.yml
+config.json
+
 # Dependency directories
 node_modules/
 jspm_packages/
