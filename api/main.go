@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -13,41 +12,19 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sahilm/fuzzy"
 
-	c "github.com/weems/mikeslikes-blog/config"
-
-	"github.com/spf13/viper"
+	articles "mikeslikes.blog/articles"
+	c "mikeslikes.blog/config"
+	e "mikeslikes.blog/env"
 )
 
 func main() {
-	// Set the file name of the configurations file
-	viper.SetConfigName("config")
+	e.SetEnvironment()
+	configuration := c.GetConfig()
 
-	// Set the path to look for the configurations file
-	viper.AddConfigPath(".")
-
-	// Enable VIPER to read Environment Variables
-	viper.AutomaticEnv()
-
-	viper.SetConfigType("yml")
-	var configuration c.Configurations
-
-	if err := viper.ReadInConfig(); err != nil {
-		fmt.Printf("Error reading config file, %s", err)
-	}
-
-	// Set undefined variables
-	viper.SetDefault("database.dbname", "test_db")
-
-	err := viper.Unmarshal(&configuration)
-	if err != nil {
-		fmt.Printf("Unable to decode into struct, %v", err)
-	}
-
-	fmt.Println("S3 ", configuration.S3.Region)
-
-	posts := memoizedPosts()
+	//posts := memoizedPosts()
 
 	r := gin.Default()
+	r.SetTrustedProxies(nil)
 	r.Use(CORSMiddleware())
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -56,21 +33,24 @@ func main() {
 	})
 	r.GET("/posts", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"posts": posts(),
+			"posts": articles.ListArticles(configuration.S3.Bucket),
 		})
 	})
 	r.GET("/search", func(c *gin.Context) {
 		query := c.Request.URL.Query()["query"]
 
 		c.JSON(200, gin.H{
-			"posts": fuzzy.Find(query[0], posts()),
+			"posts": fuzzy.Find(query[0], articles.ListArticles(configuration.S3.Bucket)),
 		})
 	})
 	r.GET("/article-html", func(c *gin.Context) {
-		article := c.Request.URL.Query()["article"][0]
+		requestedArticle := c.Request.URL.Query()["article"][0]
+		article := articles.DownloadFile(configuration.S3.Bucket, requestedArticle)
+
+		html := getArticle(article.Name())
 
 		c.JSON(200, gin.H{
-			"article": string(getArticle(article)),
+			"article": string(html),
 		})
 	})
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
@@ -94,7 +74,7 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func getArticle(article string) []byte {
 	// Directory we want to get all files from.
-	md, err := ioutil.ReadFile("../posts/" + article + ".md")
+	md, err := ioutil.ReadFile(article)
 	if err != nil {
 		log.Fatal(err)
 	}

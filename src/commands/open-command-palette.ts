@@ -5,7 +5,7 @@ import {Command_SearchArticles} from './search-articles';
 import { Command } from './types';
 
 const COMMAND_LIST = [Command_SetTheme, Command_SearchArticles];
-const COMMAND_MAP = COMMAND_LIST.reduce((a, c) => ({...a, [c.name]: c}), {});
+const COMMAND_MAP: Record<string, unknown> = COMMAND_LIST.reduce((a, c) => ({...a, [c.name]: c}), {});
 
 function getElements() {
   const commandPalette = document.querySelector('.command-palette');
@@ -28,12 +28,10 @@ function renderCommandSelect(){
   const results: SearchResult[] = COMMAND_LIST.map((command) => ({dataType: 'command', data: command.name, title: command.name, description: ''}));
   searchResults.innerHTML = searchResultsTemplate(results);
 
-  const searchContainer = whenElementReady('[data-command]');
-
   const commands = searchResults.querySelectorAll('[data-command]');
 
-  commands.forEach((element) => element.addEventListener('click', (event) => {
-    const commandKey = element.getAttribute('data-command');
+  commands.forEach((element) => element.addEventListener('click', () => {
+    const commandKey = element.getAttribute('data-command')!;
     (COMMAND_MAP[commandKey] as Command).renderInCommandPalette();
   }));
 }
@@ -71,7 +69,7 @@ export async function openCommandPalette(options: {mode: 'search' | 'command'}){
     default: 
   }
 
-  searchBar.addEventListener('keyup', (event) => {
+  searchBar.addEventListener('keyup', () => {
     if (searchBar.value.startsWith('>')){
       renderCommandSelect();
     } else {

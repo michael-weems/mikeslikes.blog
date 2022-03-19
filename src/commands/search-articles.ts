@@ -1,5 +1,5 @@
 import { searchResultsTemplate } from '../search-result-template';
-import { isNotDefined, titleCase, whenElementReady } from '../utils';
+import { isNotDefined, whenElementReady } from '../utils';
 import {closeCommandPalette, isCommandPaletteOpen, openCommandPalette} from './open-command-palette';
 import { Command } from './types';
 
@@ -13,7 +13,7 @@ interface SearchResult {
 export async function renderInCommandPalette(){
   whenElementReady('#search-bar').then( (searchBar) => {
 
-    searchBar.addEventListener('keyup', async (event) => {
+    searchBar.addEventListener('keyup', async () => {
       const searchResults = await whenElementReady('#search-results');
       const text = (<HTMLInputElement>searchBar).value;
 
@@ -42,7 +42,7 @@ export async function renderInCommandPalette(){
         const articleDiv = document.getElementById('article-div');
         if (isNotDefined(articleDiv)) throw new Error('articleDiv not defined');
 
-        articleLinks.forEach((element) => element.addEventListener('click', (event) => {
+        articleLinks.forEach((element) => element.addEventListener('click', () => {
           const articleTitle = element.getAttribute('data-article');
           closeCommandPalette().then(() => {
             console.log('clicked article', element.getAttribute('data-article'));

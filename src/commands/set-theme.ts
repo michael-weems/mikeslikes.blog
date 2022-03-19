@@ -18,7 +18,7 @@ export async function renderInCommandPalette(){
 
   const themeChoices = searchResults.querySelectorAll('[data-command]');
 
-  themeChoices.forEach((element) => element.addEventListener('click', (event) => {
+  themeChoices.forEach((element) => element.addEventListener('click', () => {
     const themeChoice = element.getAttribute('data-command') as Theme;
     console.log('selected theme', themeChoice);
     setTheme(themeChoice);

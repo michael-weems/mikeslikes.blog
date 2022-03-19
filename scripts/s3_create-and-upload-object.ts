@@ -1,14 +1,26 @@
 
 // Import required AWS SDK clients and commands for Node.js.
+import {config as readEnv} from 'dotenv'
+readEnv();
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { s3Client } from "./s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 import config from './config.json';
-import path from "path";
 import fs from "fs";
+import path from "path";
 
-const fileNames = process.argv.slice(2);
+interface BucketParams {
+  Bucket: string;
+  Key: string;
+  Body: fs.ReadStream
+}
 
-const files = fileNames.map((file) => `../posts/${file}`).map((serverPath) => {
+
+const getFiles = (source: string) =>
+  fs.readdirSync(source, { withFileTypes: true })
+    .filter(file => false == file.isDirectory())
+    .map(file => file.name)
+
+const files = getFiles('../posts').map((file) => `../posts/${file}`).map((serverPath) => {
     // Set the parameters.
     return {
         Bucket: config.bucket,
@@ -21,9 +33,10 @@ const files = fileNames.map((file) => `../posts/${file}`).map((serverPath) => {
 });
 
 // Create and upload the object to the S3 bucket.
-export const run = async (bucketParams) => {
+export const run = async (bucketParams: BucketParams) => {
   try {
     const data = await s3Client.send(new PutObjectCommand(bucketParams));
+    console.log('result data', data);
     //return data; // For unit tests.
     console.log(
       "Successfully uploaded object: " +

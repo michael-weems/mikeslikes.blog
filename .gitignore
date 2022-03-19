@@ -38,8 +38,8 @@ bower_components
 build/Release
 bin/
 
-config.yml
-config.json
+.env
+s3/
 
 # Dependency directories
 node_modules/
