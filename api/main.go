@@ -13,13 +13,11 @@ import (
 	"github.com/sahilm/fuzzy"
 
 	articles "mikeslikes.blog/articles"
-	c "mikeslikes.blog/config"
-	e "mikeslikes.blog/env"
 )
 
+var bucket = "mikeslikes.blog"
+
 func main() {
-	e.SetEnvironment()
-	configuration := c.GetConfig()
 
 	//posts := memoizedPosts()
 
@@ -33,19 +31,19 @@ func main() {
 	})
 	r.GET("/posts", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"posts": articles.ListArticles(configuration.S3.Bucket),
+			"posts": articles.ListArticles(bucket),
 		})
 	})
 	r.GET("/search", func(c *gin.Context) {
 		query := c.Request.URL.Query()["query"]
 
 		c.JSON(200, gin.H{
-			"posts": fuzzy.Find(query[0], articles.ListArticles(configuration.S3.Bucket)),
+			"posts": fuzzy.Find(query[0], articles.ListArticles(bucket)),
 		})
 	})
 	r.GET("/article-html", func(c *gin.Context) {
 		requestedArticle := c.Request.URL.Query()["article"][0]
-		article := articles.DownloadFile(configuration.S3.Bucket, requestedArticle)
+		article := articles.DownloadFile(bucket, requestedArticle)
 
 		html := getArticle(article.Name())
 

@@ -20,7 +20,7 @@ export async function renderInCommandPalette(){
       if (text == '') return;
   
       // searchResults.innerHTML = '';
-      fetch(`http://localhost:8080/search?query=${text}`).then(response => response.json()).then(async (response: {posts: SearchResult[]}) => {
+      fetch(`https://mikeslikes.blog:8080/search?query=${text}`).then(response => response.json()).then(async (response: {posts: SearchResult[]}) => {
         console.log('response', response);
         const {posts} = response;
         if (isNotDefined(posts)) {
@@ -46,7 +46,7 @@ export async function renderInCommandPalette(){
           const articleTitle = element.getAttribute('data-article');
           closeCommandPalette().then(() => {
             console.log('clicked article', element.getAttribute('data-article'));
-            fetch(`http://localhost:8080/article-html?article=${articleTitle}`).then(response => response.json()).then((response: {article: string}) => {
+            fetch(`https://mikeslikes.blog:8080/article-html?article=${articleTitle}`).then(response => response.json()).then((response: {article: string}) => {
               articleDiv!.innerHTML = response.article;
             });
           });

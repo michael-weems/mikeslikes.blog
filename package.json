@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --mode dev",
+    "ci-build": "tsc && vite build --mode prod",
     "build-scripts": "tsc --project tsconfig.scripts.json && cp api/.env dist/s3Client/.env",
-    "watch-scripts": "tsc --project tsconfig.scripts.json --watch",
-    "preview": "vite preview",
-    "posts": "markdown-folder-to-html posts"
+    "preview": "vite preview"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.54.1",

@@ -1,2 +1,4 @@
-web: dist/api/main
-web: dist/ui/index.html
+build:
+  docker:
+    web: Dockerfile
+    api: api/Dockerfile
