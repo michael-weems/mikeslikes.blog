@@ -39,7 +39,7 @@ build/Release
 bin/
 
 .env
-s3/
+posts/*.md
 
 # Dependency directories
 node_modules/

@@ -1,2 +1,2 @@
-web: bin/api
-web: dist/index.html
+web: dist/api/main
+web: dist/ui/index.html

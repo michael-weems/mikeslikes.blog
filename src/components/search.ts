@@ -9,7 +9,7 @@ export const Search: Promise<Component<{}>> = whenElementReady(`#${selector}`).t
     onInit(){},
     readyWhen: ['#search-bar', '#search-results'],
     data: {}, 
-    template: (props) => `
+    template: () => `
     <input id="search-bar" type="text" />
     <div id="search-results"></div>`,
   });

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build-scripts": "tsc --project tsconfig.scripts.json && cp api/.env s3/.env",
+    "build-scripts": "tsc --project tsconfig.scripts.json && cp api/.env dist/s3Client/.env",
     "watch-scripts": "tsc --project tsconfig.scripts.json --watch",
     "preview": "vite preview",
     "posts": "markdown-folder-to-html posts"

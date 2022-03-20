@@ -16,7 +16,7 @@ export const CommandPalette: Promise<Popup<{}> & Commandable> = whenElementReady
       readyWhen: ['.body-blackout', '.command-palette'],
       data: {}, 
       
-      template: (props) => `
+      template: () => `
       <!-- body overlay -->
       <div class="body-blackout"></div>
 

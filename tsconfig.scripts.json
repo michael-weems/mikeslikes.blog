@@ -13,7 +13,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "outDir": "s3"
+    "outDir": "dist/s3Client"
   },
-  "include": ["scripts"],
+  "include": ["s3Client"],
 }

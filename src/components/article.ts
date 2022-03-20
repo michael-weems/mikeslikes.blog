@@ -9,7 +9,7 @@ export const Article: Promise<Component<{}>> = whenElementReady(`#${selector}`).
     onInit(){},
     readyWhen: ['#article-div'],
     data: {}, 
-    template: (props) => `
+    template: () => `
     <div class="article-container">
       <div></div>
       <div id="article-div" class="article"></div>
