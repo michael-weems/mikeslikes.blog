@@ -1,3 +1,5 @@
+import {config} from 'dotenv'
+config();
 import './style.css';
 import { isNotDefined } from './utils';
 import './components/command-palette';
