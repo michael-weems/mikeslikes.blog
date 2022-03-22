@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --mode dev",
-    "ci-build": "tsc && vite build --mode prod",
+    "dev-build": "tsc && vite build --mode development",
+    "prod-build": "tsc && vite build --mode production",
     "build-scripts": "tsc --project tsconfig.scripts.json && cp api/.env dist/s3Client/.env",
     "preview": "vite preview"
   },

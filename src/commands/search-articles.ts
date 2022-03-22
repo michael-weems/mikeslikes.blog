@@ -2,6 +2,7 @@ import { searchResultsTemplate } from '../search-result-template';
 import { isNotDefined, whenElementReady } from '../utils';
 import {closeCommandPalette, isCommandPaletteOpen, openCommandPalette} from './open-command-palette';
 import { Command } from './types';
+import {env} from '../env'
 
 interface SearchResult {
   Str: string;
@@ -20,7 +21,7 @@ export async function renderInCommandPalette(){
       if (text == '') return;
   
       // searchResults.innerHTML = '';
-      fetch(`${import.meta.env.VITE_API_ADDRESS}/search?query=${text}`).then(response => response.json()).then(async (response: {posts: SearchResult[]}) => {
+      fetch(`${env.API_ADDRESS}/search?query=${text}`).then(response => response.json()).then(async (response: {posts: SearchResult[]}) => {
         console.log('response', response);
         const {posts} = response;
         if (isNotDefined(posts)) {
@@ -46,7 +47,7 @@ export async function renderInCommandPalette(){
           const articleTitle = element.getAttribute('data-article');
           closeCommandPalette().then(() => {
             console.log('clicked article', element.getAttribute('data-article'));
-            fetch(`${import.meta.env.VITE_API_ADDRESS}/article-html?article=${articleTitle}`).then(response => response.json()).then((response: {article: string}) => {
+            fetch(`${env.API_ADDRESS}/article-html?article=${articleTitle}`).then(response => response.json()).then((response: {article: string}) => {
               articleDiv!.innerHTML = response.article;
             });
           });
