@@ -9,7 +9,8 @@ const app = document.querySelector<HTMLDivElement>('#app');
 if (isNotDefined(app)) throw new Error('Could not find the app HTML Element!');
 
 app.innerHTML = `
-  <img src="https://i.redd.it/itafxefzhd0z.jpg"/>
+<div class="content">
+  <img style="width:320px; height:180px;" src="https://i.redd.it/itafxefzhd0z.jpg"/>
   <div id="command-palette"></div>
   <div id="article"></div>
   

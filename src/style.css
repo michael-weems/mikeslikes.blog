@@ -65,6 +65,8 @@
 
   /* Command Palette */
   --command-palette-height: 10rem;
+  --command-palette-width: 650px;
+  --search-bar-width: 575px;
 }
 
 /* FROM Type Scale */
@@ -422,6 +424,8 @@ button.small {
 @media only screen and (max-width: 500px) {
   :root {
     --base-font-size: 100%;
+    --command-palette-width: 80%;
+    --search-bar-width: 80%;
   }
 
   .grid {
@@ -449,9 +453,13 @@ button.small {
   display: block;
 }
 
+.search-bar {
+  width: var(--search-bar-width);
+}
+
 .command-palette {
   height: var(--command-palette-height);
-  width: 650px;
+  width: var(--command-palette-width);
   position: fixed;
   left: 50%;
   top: 20rem;
