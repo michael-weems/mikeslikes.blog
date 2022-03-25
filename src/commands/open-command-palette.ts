@@ -69,11 +69,16 @@ export async function openCommandPalette(options: {mode: 'search' | 'command'}){
     default: 
   }
 
+  let state = 'command'
   searchBar.addEventListener('keyup', () => {
     if (searchBar.value.startsWith('>')){
-      renderCommandSelect();
-    } else {
+      if (state == 'search'){
+        renderCommandSelect();
+        state = 'command'
+      }
+    } else if (state == 'command') {
       renderSearchArticles();
+      state = 'search'
     }
   });
 

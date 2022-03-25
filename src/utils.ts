@@ -19,3 +19,17 @@ export function titleCase(value: string): string{
     (word.charAt(0).toUpperCase() + word.slice(1))
   ).join(' ');
 }
+
+/**
+ * https://www.freecodecamp.org/news/javascript-debounce-example/
+ * @param func 
+ * @param timeout 
+ * @returns 
+ */
+export function debounce(func: Function, timeout = 300){
+  let timer: NodeJS.Timeout;
+  return (...args: any) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
+}

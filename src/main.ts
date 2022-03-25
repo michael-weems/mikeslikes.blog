@@ -29,4 +29,4 @@ whenElementReady('.fab').then((fab) => {
   })
 })
 
-detectswipe('body', () => openCommandPalette({mode: 'command'}).then());
+detectswipe('body', () => openCommandPalette({mode: 'search'}).then());
