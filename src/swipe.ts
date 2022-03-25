@@ -21,20 +21,20 @@ export function detectswipe(elementId: string, action: () => Promise<void>) {
   const element = document.getElementById(elementId);
   if (isNotDefined(element)) throw new Error(`Could not find swipe element ${elementId}`)
 
-  element.addEventListener('touchstart',function(e){
+  element.addEventListener('touchstart', (e) => {
     var t = e.touches[0];
     swipe_det.sX = t.screenX; 
     swipe_det.sY = t.screenY;
   },false);
 
-  element.addEventListener('touchmove',function(e){
+  element.addEventListener('touchmove',(e) => {
     e.preventDefault();
     var t = e.touches[0];
     swipe_det.eX = t.screenX; 
     swipe_det.eY = t.screenY;    
   },false);
 
-  element.addEventListener('touchend', function(e){
+  element.addEventListener('touchend', () => {
     //horizontal detection
     if ((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y) && (swipe_det.eX > 0)))) {
       if(swipe_det.eX > swipe_det.sX) direc = "r";
