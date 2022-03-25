@@ -3,7 +3,7 @@ import { isNotDefined, whenElementReady } from './utils';
 import './components/command-palette';
 import './components/article';
 import './components/search';
-import { openCommandPalette } from './commands/open-command-palette';
+import { closeCommandPalette, openCommandPalette } from './commands/open-command-palette';
 import { detectswipe } from './swipe';
 
 const app = document.querySelector<HTMLDivElement>('#app');
