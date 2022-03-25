@@ -1,6 +1,6 @@
 import { searchResultsTemplate } from '../search-result-template';
-import { debounce, isNotDefined, whenElementReady } from '../utils';
-import {closeCommandPalette, isCommandPaletteOpen, openCommandPalette} from './open-command-palette';
+import { isNotDefined, whenElementReady } from '../utils';
+import {closeCommandPalette} from './open-command-palette';
 import { Command } from './types';
 import {env} from '../env'
 
