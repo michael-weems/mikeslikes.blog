@@ -46,7 +46,7 @@ export function detectswipe(elementId: string, action: () => Promise<void>) {
       else direc = "u";
     }
 
-    if (direc != "" && direc != "u") {
+    if (direc == "l" || direc == "r") {
       if(typeof action == 'function') action();
     }
     direc = "";
