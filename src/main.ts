@@ -5,6 +5,7 @@ import './components/article';
 import './components/search';
 import { openCommandPalette } from './commands/open-command-palette';
 import { detectswipe } from './swipe';
+import { Command_ListArticles } from './commands/list-articles';
 
 const app = document.querySelector<HTMLDivElement>('#app');
 if (isNotDefined(app)) throw new Error('Could not find the app HTML Element!');
@@ -30,3 +31,7 @@ whenElementReady('.fab').then((fab) => {
 })
 
 detectswipe('body', () => openCommandPalette({mode: 'search'}).then());
+
+whenElementReady('#article').then(() => {
+  Command_ListArticles.action();
+})

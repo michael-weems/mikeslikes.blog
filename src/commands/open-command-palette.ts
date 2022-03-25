@@ -3,8 +3,9 @@ import { Command_SetTheme } from './set-theme';
 import { SearchResult, searchResultsTemplate } from '../search-result-template';
 import {Command_SearchArticles} from './search-articles';
 import { Command } from './types';
+import { Command_ListArticles } from './list-articles';
 
-const COMMAND_LIST = [Command_SetTheme, Command_SearchArticles];
+const COMMAND_LIST = [Command_SetTheme, Command_SearchArticles, Command_ListArticles];
 const COMMAND_MAP: Record<string, unknown> = COMMAND_LIST.reduce((a, c) => ({...a, [c.name]: c}), {});
 
 function getElements() {

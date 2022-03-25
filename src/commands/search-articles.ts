@@ -10,15 +10,12 @@ interface SearchResult {
   MatchedIndexes: number[];
   Score: number
 }
-let count = 1;
 async function performSearch(searchBar: Element): Promise<void> {
   const searchResults = await whenElementReady('#search-results');
   const text = (<HTMLInputElement>searchBar).value;
   if (text == '') return;
 
-  // searchResults.innerHTML = '';
   fetch(`${env.API_ADDRESS}/search?query=${text}`).then(response => response.json()).then(async (response: {posts: SearchResult[]}) => {
-    console.log('response', response);
     const {posts} = response;
     if (isNotDefined(posts)) {
       searchResults.innerHTML = '';
@@ -54,7 +51,6 @@ async function performSearch(searchBar: Element): Promise<void> {
 
 
 export async function renderInCommandPalette(){
-  console.log('render in command palette', count++)
   whenElementReady('#search-bar').then( (searchBar) => {
 
     const debouncedSearch = debounce(() => performSearch(searchBar), 100)
